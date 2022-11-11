@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="sass/main.css">
+</head>
+<body>
+	
+
+<div class="site-wrap">
+	<!-- main-santapolis start -->
+	<div class="santapolis-main">
+		<div class="container">
+			<div class="santapolis-main-wrapper">
+				<div class="santapolis-main-wrapper__main-bg">
+					<div class="santapolis-main-wrapper__img-bg">
+						<img src="img/mega-banner.png" alt="mega-banner"> 
+					</div>
+					<div class="santapolis-main-wrapper__img-santa js-popup-santapolis" data-modal="#modal_popup_santapolis">
+							<img src="img/Santa_Claus.png" alt="santa">
+					</div>
+					<div class="santapolis-main-wrapper__header-banners">
+						<img src="img/window_banners.png" alt="header-banners">
+						<div class="santapolis-main-wrapper__banner-left-today">
+							<img src="img/today.png" alt="">
+						</div>
+						<div class="santapolis-main-wrapper__banner-right-tomorrow">
+							<img src="img/tomorrow.png" alt="">
+						</div>
+						<div class="santapolis-main-wrapper__banner-push">
+							<img src="img/btn_push.png" alt="">
+						</div>
+					</div>
+					<div class="santapolis-main-wrapper__banner-left">
+						<!-- <a class="santapolis-main-wrapper__banner-left-link" href="#"></a> -->
+						<img src="https://www.clever-media.ru/upload/iblock/abc/abc9dbc71befadd9cfaa6945ebd315ce.jpg" alt="">
+					</div>
+					<div class="santapolis-main-wrapper__banner-right">
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/New_Year_tree_04.jpg/1200px-New_Year_tree_04.jpg" alt="">
+					</div>
+					<div class="santapolis-main-wrapper__offer">
+						<img src="img/2-layers.png" alt="offer">
+					</div>
+					<div class="santapolis-main-wrapper__offer-top">
+						<img src="img/lampa.png" alt="lampa">
+					</div>
+					<div class="santapolis-main-wrapper__appearance">
+						<img src="img/rec.png" alt="appearance">
+						<a class="santapolis-main-wrapper__offer-link" target="_blank" href="https://www.google.com/"></a>
+					</div>
+					<div class="santapolis-main-wrapper__logo-marvin">
+						<img src="img/logo_marvin.png" alt="marvin">
+					</div>
+					<div class="santapolis-main-wrapper__arrow-minutes">
+						<img src="img/arrow_minute.png" alt="arrow-minutes">
+						<div class="santapolis-main-wrapper__santa">
+							<img src="img/santa_circle.png" alt="">
+						</div>
+					</div>
+					<div class="santapolis-main-wrapper__arrow-hours">
+						<img src="img/arrow_hour.png" alt="arrow-hours">
+					</div>
+					<div class="santapolis-main-wrapper__footer">
+						<img src="img/footer.png" alt="footer">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- main-santapolis end -->
+	<!-- Popup call start -->
+	<div id="modal_popup_santapolis" class="santapolis-popup">
+		<div class="santapolis-popup__title">
+			<div>Адвент-календарь</div>
+			  <h3>Santapolis</h3>
+			<ul class="santapolis-popup__content">
+				<li>Проводится <span>во всех магазинах и онлайн-магазинах MARVIN и MELOMAN.</span></li>
+				<li>Период проведения акции: <span>с 19 ноября до 19 декабря 2022 года.</span></li>
+				<li>В первый день акции - <span>19 ноября </span> - все участники программы лояльности Клуба MELOMAN
+					получают 3% <span>бонуса за любые покупки </span> совершённые в любых магазинах MARVIN и MELOMAN,
+					включая интернет-магазин.
+				</li>
+				<li>Мы любим животных и стараемся поддерживать тех из них, 
+					кому не посчастливилось иметь ласковых хозяев и тёплый кров.
+				</li>
+			</ul>
+			  <div class="santapolis-close">&#10006;</div>
+		</div>
+	  </div>
+
+	  <div class="santapolis-popup__backdrop hidden" id="modal-backdrop"></div>
+	<!-- Popup call end -->
+</div>
+	
+
+
+    <script>
+		const rotateArrowHours = document.querySelector('.santapolis-main-wrapper__arrow-hours img'),
+		rotateArrowMinutes = document.querySelector('.santapolis-main-wrapper__arrow-minutes img');
+		window.addEventListener('scroll', () => {
+			const scroll = window.scrollY;
+			const eventHours = scroll / 110;
+			const eventMinutes = scroll / 8.3;
+			rotateArrowHours.style.transform = `rotate(${eventHours}deg)`;
+			rotateArrowMinutes.style.transform = `rotate(${eventMinutes}deg)`;
+		});
+
+
+  const backdrop = document.querySelector('#modal-backdrop');
+  document.addEventListener('click', modalHandler);
+  
+  function modalHandler(e) {
+    const modalBtnOpen = e.target.closest('.js-popup-santapolis');
+    if (modalBtnOpen) {
+      const modalSelector = modalBtnOpen.dataset.modal;
+      showModal(document.querySelector(modalSelector));
+    }
+
+    const modalBtnClose = e.target.closest('.santapolis-close');
+    if (modalBtnClose) hideModal(modalBtnClose.closest('.santapolis-popup'));
+    if (e.target.matches('#modal-backdrop')) hideModal(document.querySelector('.santapolis-popup.show'));
+  }
+
+  function showModal(modalElem) {
+    modalElem.classList.add('show');
+    backdrop.classList.remove('hidden');
+  }
+
+  function hideModal(modalElem) {
+    modalElem.classList.remove('show');
+    backdrop.classList.add('hidden');
+  }
+
+
+		
+
+	</script>
+
+</body>
+</html>
